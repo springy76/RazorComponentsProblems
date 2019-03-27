@@ -6,7 +6,60 @@
 
 <button class="btn btn-primary" onclick="@IncrementCount">Click me</button>
 
-@functions {
+<div class="row">
+    <div class="col-2"><GenericBindingVisualizer Value="@this.boolValue" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.byteValue" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.sbyteValue" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.charValue" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.decimalValue" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.doubleValue" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.floatValue" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.intValue" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.uintValue" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.longValue" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.ulongValue" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.shortValue" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.ushortValue" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.stringValue" /></div>
+
+    <div class="col-2"><GenericBindingVisualizer Value="@this.guidValue" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.dtValue" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.tsValue" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.tupleValue" /></div>
+
+    <div class="col-2"><GenericBindingVisualizer Value="@this.ioInfo" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.sizeValue" /></div>
+    <div class="col-2"><GenericBindingVisualizer Value="@this.testValue" /></div>
+</div>
+
+@functions
+{
+    // all aliased built-in types of C# (except object)
+    private bool boolValue = true;
+    private byte byteValue = 42;
+    private sbyte sbyteValue = -42;
+    private char charValue = 'c';
+    private decimal decimalValue = 234.56m;
+    private double doubleValue = 123.45d;
+    private float floatValue = 345.67f;
+    private int intValue = -123;
+    private uint uintValue = 123;
+    private long longValue = -1234567890123;
+    private ulong ulongValue = 1234567890123;
+    private short shortValue = -456;
+    private ushort ushortValue = 456;
+    private string stringValue = "test";
+
+    // some often used structs from System namespace
+    private Guid guidValue = Guid.NewGuid();
+    private DateTime dtValue = DateTime.UtcNow; // that's the ONLY exception?
+    private TimeSpan tsValue = DateTime.UtcNow.TimeOfDay;
+    private (int, double) tupleValue = (567, 678.9);
+
+    private System.IO.DirectoryInfo ioInfo = new System.IO.DirectoryInfo(@"c:\");
+    private System.Drawing.Size sizeValue = new System.Drawing.Size(10, 20);
+    private Services.TestClass testValue = new Services.TestClass();
+
     int currentCount = 0;
 
     void IncrementCount()

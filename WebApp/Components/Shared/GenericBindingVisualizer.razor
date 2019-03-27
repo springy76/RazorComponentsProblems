@@ -1,0 +1,44 @@
+@typeparam T
+
+<div class="card m-2">
+    <header class="card-header">
+        <h4>@(typeof(T).Name): <small>@this.Value</small></h4>
+        @*@foreach ( var intf in typeof(T).GetInterfaces() )
+        {
+            <div><small>@intf</small></div>
+        }*@
+    </header>
+    <ul class="card-body">
+        @foreach ( var item in this.log )
+        {
+            <li>@item</li>
+        }
+    </ul>
+</div>
+
+@functions
+{
+    private readonly Queue<string> log = new Queue<string>();
+    private int counter;
+    private T _value;
+
+    [Parameter]
+    private T Value
+    {
+        get => this._value;
+        set
+        {
+            this._value = value;
+            this.log.Enqueue($"setter -> {value}");
+        }
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        this.log.Enqueue($"O-P-S#{++this.counter} -> {this.Value}");
+        while ( this.log.Count > 3 )
+            this.log.Dequeue();
+    }
+}
