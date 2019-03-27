@@ -6,7 +6,7 @@
 
 <p>This component demonstrates fetching data from a service.</p>
 
-@if (forecasts == null)
+@if ( forecasts == null )
 {
     <p><em>Loading...</em></p>
 }
@@ -22,7 +22,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach ( var forecast in forecasts )
             {
                 <tr>
                     <td>@forecast.Date.ToShortDateString()</td>
