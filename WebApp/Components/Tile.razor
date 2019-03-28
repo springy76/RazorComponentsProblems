@@ -1,0 +1,62 @@
+﻿@implements IDisposable
+
+<div>@this.Value x @this.Multiplier</div>
+@if ( this.result is int r )
+{
+    <p>
+        <span>
+            <span>
+                <span>
+                    <span>
+                        <span>
+                            <span>
+                                <span>
+                                    <span>
+                                        <span>
+                                            <span>
+                                                <span>
+                                                    <span>
+                                                        R: @r
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </span>
+                </span>
+            </span>
+        </span>
+    </p>
+}
+else
+{
+    <Loader />
+}
+
+@functions
+{
+    private int? result;
+
+    [Parameter] private int Value { get; set; }
+
+    [Parameter] private int Multiplier { get; set; }
+
+    public void Dispose()
+    {
+        System.Threading.Thread.Sleep(1); // Simulate CPU-bound work
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        this.result = null;
+
+        await base.OnParametersSetAsync();
+
+        var r = this.Value * this.Multiplier;
+        await Task.Delay(r);
+        this.result = r;
+    }
+}

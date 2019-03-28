@@ -1,5 +1,45 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<div class="row">
+    @for ( int i = 0; i < 12; i++ )
+    {
+        var local = i;
+        <button class="col-1" onclick="@(e => SetValueAsync(local))" disabled="@(this.value == local || this.value == null)">@local</button>
+    }
+</div>
 
-Welcome to your new app.
+@if ( this.value is int v )
+{
+    <div class="row">
+        @for ( int i = 0; i < 168; i++ )
+        {
+            var local = 168 - i;
+            <div class="col-1">
+                <Tile Value="@v" Multiplier="@local" />
+            </div>
+        }
+    </div>
+}
+else
+{
+    <Loader />
+}
+
+@functions
+{
+    private int? value;
+
+    protected override async Task OnInitAsync()
+    {
+        await base.OnInitAsync();
+        await Task.Delay(1000);
+        this.value = 5;
+    }
+
+    private async Task SetValueAsync(int newVal)
+    {
+        this.value = null;
+        await Task.Delay(200);
+        this.value = newVal;
+    }
+}
