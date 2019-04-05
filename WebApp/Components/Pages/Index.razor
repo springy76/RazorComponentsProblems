@@ -31,15 +31,23 @@ else
 
     protected override async Task OnInitAsync()
     {
+        this.StateHasChanged();
         await base.OnInitAsync();
+        this.StateHasChanged();
         await Task.Delay(1000);
+        this.StateHasChanged();
         this.value = 5;
+        this.StateHasChanged();
     }
 
     private async Task SetValueAsync(int newVal)
     {
+        this.StateHasChanged();
         this.value = null;
+        this.StateHasChanged();
         await Task.Delay(200);
+        this.StateHasChanged();
         this.value = newVal;
+        this.StateHasChanged();
     }
 }

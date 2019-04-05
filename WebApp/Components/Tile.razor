@@ -51,12 +51,16 @@ else
 
     protected override async Task OnParametersSetAsync()
     {
+        this.StateHasChanged();
         this.result = null;
-
+        this.StateHasChanged();
         await base.OnParametersSetAsync();
-
+        this.StateHasChanged();
         var r = this.Value * this.Multiplier;
+        this.StateHasChanged();
         await Task.Delay(r);
+        this.StateHasChanged();
         this.result = r;
+        this.StateHasChanged();
     }
 }
