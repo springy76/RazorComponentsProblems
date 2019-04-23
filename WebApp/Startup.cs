@@ -8,8 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WebApp.Components;
-using WebApp.Services;
+using WebApp.Data;
 
 namespace WebApp
 {
@@ -19,11 +18,8 @@ namespace WebApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-                .AddNewtonsoftJson();
-
-            services.AddRazorComponents();
-
+            services.AddRazorPages();
+            services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
 
             services.AddScoped<CircuitIdService>();
@@ -43,12 +39,15 @@ namespace WebApp
             }
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
-            app.UseRouting(routes =>
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRazorPages();
-                routes.MapComponentHub<App>("app");
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/_Host");
             });
         }
     }
