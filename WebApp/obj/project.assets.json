@@ -98,11 +98,7 @@
           "net461"
         ],
         "assetTargetFallback": true,
-        "warn": true,
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App",
-          "Microsoft.NETCore.App"
-        ]
+        "warn": true
       }
     }
   }
